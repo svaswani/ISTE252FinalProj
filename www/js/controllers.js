@@ -9,19 +9,33 @@ angular.module('starter.controllers', [])
     var mapOptions = {
       center: {lat: 43.083848, lng: -77.6799},
       //center: myLatlng,
-      zoom: 16,
+      zoom: 19,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
     var map = new google.maps.Map(document.getElementById("map"),
         mapOptions);
 
+    google.maps.event.addListener(map, 'click', function(event) {
+          addMarker(event.latLng, map);
+        });
 
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'My Location'
-    });
+    // Adds a marker to the map.
+    function addMarker(location, map) {
+      // Add the marker at the clicked location, and add the next-available label
+      // from the array of alphabetical characters.
+      var marker = new google.maps.Marker({
+        position: location,
+        label: "Bathroom",
+        map: map
+      });
+    }
+
+    // var marker = new google.maps.Marker({
+    //   position: {lat: 43.083848, lng: -77.6799},
+    //   map: map,
+    //   title: 'Womens bathroom'
+    // });
 
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map,marker);
