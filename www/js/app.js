@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaSQLite, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,6 +20,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // This will create an empty database when the app runs the first time
+   // and create the table 'tasks'.
+   // for a browser:
+   $rootScope.db = window.openDatabase("snehasList.db", '1.0', 'App Demo', 65536);
+   // for the device:
+   //$rootScope.db = $cordovaSQLite.openDB({name: "ex05.db"});
+   $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tasks (num integer, taskitem text)");
+
   });
 })
 
