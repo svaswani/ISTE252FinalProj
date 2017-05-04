@@ -46,12 +46,15 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('BathroomsCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+.controller('BathroomsCtrl', function($scope, $cordovaSQLite) {
+    $scope.insert = function( ) {
+    myComment = $scope.bathroomcomment;
+    var query = "INSERT INTO bathroom1 (bathroomcomment) VALUES (?)";
+    $cordovaSQLite.execute($scope.db,query,[myComment]).then(function(result) {
+      console.log("user input: " + myComment);
+      }, 
+    function(error) {
+      console.error(error);
+       });
   };
 });

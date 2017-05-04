@@ -1,9 +1,11 @@
 <ion-view view-title="Account">
   <ion-content>
     <ion-list>
-     	<ion-item>
-  			<p>Bathroom</p>
-  		</ion-item>
+    <p>Bathroom</p>
+     <div>
+        <input  type="text" placeholder="Comments or reviews" ng-model="bathroomcomment">
+      </div>
+      <button class="button button-block button-stable" ng-click="insert()">Comment</button>
     </ion-list>
   </ion-content>
 </ion-view>
