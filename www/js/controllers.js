@@ -2,9 +2,9 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, $ionicLoading, $compile) {
+.controller('MapCtrl', function($scope, $ionicLoading, $compile) {
   $scope.initialize = function() {
-    var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+    var myLatlng = new google.maps.LatLng(43.083848,-77.6799);
     
     var mapOptions = {
       center: {lat: 43.083848, lng: -77.6799},
