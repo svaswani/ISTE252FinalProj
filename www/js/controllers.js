@@ -62,14 +62,15 @@ angular.module('starter.controllers', [])
 })
 
 .controller('BathroomsCtrl', function($scope, $cordovaSQLite) {
-    $scope.insert = function( ) {
-    myComment = $scope.bathroomcomment;
+  $scope.data = {};
+
+  $scope.insert = function() {
+    myComment = $scope.data.bathroomcomment;
     var query = "INSERT INTO bathroom1 (bathroomcomment) VALUES (?)";
     $cordovaSQLite.execute($scope.db,query,[myComment]).then(function(result) {
       console.log("user input: " + myComment);
-      }, 
-    function(error) {
+    }, function(error) {
       console.error(error);
-       });
+    });
   };
 });
