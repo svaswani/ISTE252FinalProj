@@ -62,38 +62,58 @@ angular.module('starter.controllers', [])
 })
 
 .controller('BathroomsCtrl', function($scope, $cordovaSQLite) {
-  $scope.data = {};
   $scope.items = [];
+  $scope.bathrooms = [
+    {
+      name: 'GCCIS Bathroom 1',
+      items: [],
+      input: '',
+    },
+    { 
+      name: 'GCCIS Bathroom 2',
+      items: [],
+      input: '',
+    },
+    {
+      name: 'GCCIS Bathroom 3',
+      items: [],
+      input: '',
+    }
+  ];
 
-  $scope.insert = function() {
-    myComment = $scope.data.bathroomcomment;
-    var query = "INSERT INTO GSISBathroom1 (bathroomcomment) VALUES (?)";
-    $cordovaSQLite.execute($scope.db,query,[myComment]).then(function(result) {
-      console.log("user input: " + myComment);
-      //$scope.select();
+  $scope.insert = function(bathroom) {
+    var query = "INSERT INTO bathroomcomment (comment, bathroom) VALUES (?, ?)";
+    $cordovaSQLite.execute($scope.db,query,[bathroom.input, bathroom.name]).then(function(result) {
+      console.log("user input: " + bathroom.input);
+      $scope.reloadComments();
     }, function(error) {
       console.error(error);
     });
   };
 
-    $scope.select = function() {
-      var query = "SELECT * FROM GSISBathroom1";
-      $scope.items.length = 0;  // clear out the array
-      $cordovaSQLite.execute($scope.db,query,[]).then(function(result) {
-        if(result.rows.length > 0) {
-          for(i = 0; i<result.rows.length; i++){
-            $scope.items.push({
-              comment: result.rows.item(i).bathroomcomment,
-            });
-            console.log("Comment: " + result.rows.item(i).comment);
-            
-          }
-         
-        } else {
-          console.log("NO ROWS EXIST");
+
+  $scope.reloadComments = function() {
+    var query = "SELECT * FROM bathroomcomment";
+    $scope.items.length = 0;  // clear out the array
+    $cordovaSQLite.execute($scope.db,query,[]).then(function(result) {
+      for (i = 0; i < $scope.bathrooms.length; i++) {
+        $scope.bathrooms[i].items = [];
+      }
+      if (result.rows.length > 0) {
+        for (i = 0; i < result.rows.length; i++){
+          var row = result.rows.item(i);
+          $scope.bathrooms.find(function (b) { return b.name === row.bathroom }).items.push({
+            comment: row.comment,
+          });
         }
-      }, function(error) {
-        console.error(error);
-      });
+       
+      } else {
+        console.log("NO ROWS EXIST");
+      }
+    }, function(error) {
+      console.error(error);
+    });
   };
+
+  $scope.reloadComments();
 });

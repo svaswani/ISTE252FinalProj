@@ -24,14 +24,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
     // This will create an empty database when the app runs the first time
    // and create the table 'tasks'.
    // for a browser:
-   $rootScope.db = window.openDatabase("snehasList.db", '1.0', 'App Demo', 65536);
+   $rootScope.db = window.openDatabase("snehasList2.db", '1.0', 'App Demo', 65536);
    // for the device:
    //$rootScope.db = $cordovaSQLite.openDB({name: "ex05.db"});
-   $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS GSISBathroom1 (bathroomcomment text)");
-
-   //$cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS bathroom2 (num id, bathroomcomment text)");
-
-   //$cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS bathroom3 (num id, bathroomcomment text)");
+   $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS bathroomcomment (comment text, bathroom text)");
 
   });
 })

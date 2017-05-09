@@ -1,15 +1,16 @@
-<ion-view view-title="Account">
+<ion-view view-title="Bathrooms">
   <ion-content>
-    <ion-list>
-    <h3>GSIS Bathroom 1</h3>
-     <div>
-        <input type="text" placeholder="Comments or reviews" ng-model="data.bathroomcomment">
-      </div>
-      <button class="button button-block button-stable" ng-click="insert()">Comment</button>
-      <button class="button button-block button-stable" ng-click="select()">See Comments</button>
-      <ion-item ng-repeat="item in items">
-    	<p>{{item.comment}}</p>
- 	 </ion-item>
-    </ion-list>
+    <div ng-repeat="bathroom in bathrooms">
+      <h3 style="padding-left: 10px; text-align: center;">{{bathroom.name}}</h3>
+      <ion-list>
+       <div>
+          <input type="text" placeholder="Comments or reviews" ng-model="bathroom.input">
+        </div>
+        <button class="button button-block button-stable" ng-click="insert(bathroom)">Comment</button>
+        <ion-item ng-repeat="item in bathroom.items">
+          <p>{{item.comment}}</p>
+       </ion-item>
+      </ion-list>
+    </div>
   </ion-content>
 </ion-view>
