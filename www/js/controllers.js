@@ -2,9 +2,28 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('MapCtrl', function($scope, $ionicLoading, $compile) {
+.controller('MapCtrl', function($scope, $cordovaGeolocation, $ionicLoading, $compile) {
   $scope.initialize = function() {
-    var myLatlng = new google.maps.LatLng(43.083848,-77.6799);
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  $cordovaGeolocation
+    .getCurrentPosition(posOptions)
+    .then(function (position) {
+      var lat  = position.coords.latitude;
+      var long = position.coords.longitude;
+      console.log(lat);
+      console.log(long);
+      var myLatlng = new google.maps.LatLng(lat,long);
+      addMarker(myLatlng, map);
+      // google.maps.event.addListener(marker, 'click', function() {
+      //   infowindow.open(map,marker);
+      // });
+    }, function(err) {
+      throw err;
+    });
+
+
+    //var myLatlng = new google.maps.LatLng(43.083848,-77.6799);
     
     var mapOptions = {
       center: {lat: 43.083848, lng: -77.6799},
@@ -16,9 +35,9 @@ angular.module('starter.controllers', [])
     var map = new google.maps.Map(document.getElementById("map"),
         mapOptions);
 
-    google.maps.event.addListener(map, 'click', function(event) {
-          addMarker(event.latLng, map);
-        });
+    // google.maps.event.addListener(map, 'click', function(event) {
+    //       addMarker(event.latLng, map);
+    //     });
 
     // Adds a marker to the map.
     function addMarker(location, map) {
@@ -26,7 +45,7 @@ angular.module('starter.controllers', [])
       // from the array of alphabetical characters.
       var marker = new google.maps.Marker({
         position: location,
-        label: "Bathroom",
+        label: "Your location",
         map: map
       });
     }
@@ -36,10 +55,6 @@ angular.module('starter.controllers', [])
     //   map: map,
     //   title: 'Womens bathroom'
     // });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
-    });
 
     $scope.map = map;
   }
