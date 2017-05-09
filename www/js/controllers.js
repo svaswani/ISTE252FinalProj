@@ -70,7 +70,7 @@ angular.module('starter.controllers', [])
     var query = "INSERT INTO GSISBathroom1 (bathroomcomment) VALUES (?)";
     $cordovaSQLite.execute($scope.db,query,[myComment]).then(function(result) {
       console.log("user input: " + myComment);
-      $scope.select();
+      //$scope.select();
     }, function(error) {
       console.error(error);
     });
