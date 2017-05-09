@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
       throw err;
     });
 
-
+    // gsis lat long 
     //var myLatlng = new google.maps.LatLng(43.083848,-77.6799);
     
     var mapOptions = {
