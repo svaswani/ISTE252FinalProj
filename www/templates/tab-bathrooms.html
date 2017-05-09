@@ -1,11 +1,14 @@
 <ion-view view-title="Account">
   <ion-content>
     <ion-list>
-    <p>Bathroom</p>
+    <p>Bathroom 1</p>
      <div>
         <input type="text" placeholder="Comments or reviews" ng-model="data.bathroomcomment">
       </div>
       <button class="button button-block button-stable" ng-click="insert()">Comment</button>
+      <ion-item ng-repeat="item in items">
+    	<p>{{item.comment}}</p>
+ 	 </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

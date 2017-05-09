@@ -27,7 +27,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
    $rootScope.db = window.openDatabase("snehasList.db", '1.0', 'App Demo', 65536);
    // for the device:
    //$rootScope.db = $cordovaSQLite.openDB({name: "ex05.db"});
-   $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS bathroom1 (bathroomcomment text)");
+   $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS GSISBathroom1 (bathroomcomment text)");
 
    //$cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS bathroom2 (num id, bathroomcomment text)");
 
