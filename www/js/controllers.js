@@ -3,37 +3,48 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('MapCtrl', function($scope, $cordovaGeolocation, $ionicLoading, $compile) {
+  var lat;
+    var long;
   $scope.initialize = function() {
 
+    var lat;
+    var long;
+
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
+
   $cordovaGeolocation
     .getCurrentPosition(posOptions)
     .then(function (position) {
-      var lat  = position.coords.latitude;
-      var long = position.coords.longitude;
+      lat  = position.coords.latitude;
+      long = position.coords.longitude;
       console.log(lat);
       console.log(long);
       var myLatlng = new google.maps.LatLng(lat,long);
-      addMarker(myLatlng, map);
+      var mapOptions = {
+      center: myLatlng,
+      //center: myLatlng,
+      zoom: 19,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    addMarker(myLatlng, map);
       // google.maps.event.addListener(marker, 'click', function() {
       //   infowindow.open(map,marker);
       // });
     }, function(err) {
       throw err;
     });
-
     // gsis lat long 
     //var myLatlng = new google.maps.LatLng(43.083848,-77.6799);
-    
-    var mapOptions = {
-      center: {lat: 43.083848, lng: -77.6799},
-      //center: myLatlng,
-      zoom: 19,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+    // var mapOptions = {
+    //   center: {lat, long},
+    //   //center: myLatlng,
+    //   zoom: 19,
+    //   mapTypeId: google.maps.MapTypeId.ROADMAP
+    // };
 
-    var map = new google.maps.Map(document.getElementById("map"),
-        mapOptions);
+    // var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
     // google.maps.event.addListener(map, 'click', function(event) {
     //       addMarker(event.latLng, map);
@@ -65,17 +76,17 @@ angular.module('starter.controllers', [])
   $scope.items = [];
   $scope.bathrooms = [
     {
-      name: 'GCCIS Bathroom 1',
+      name: 'GCCIS Mens Bathroom 1',
       items: [],
       input: '',
     },
     { 
-      name: 'GCCIS Bathroom 2',
+      name: 'GCCIS Mens Bathroom 2',
       items: [],
       input: '',
     },
     {
-      name: 'GCCIS Bathroom 3',
+      name: 'GCCIS Womens Bathroom 1',
       items: [],
       input: '',
     }

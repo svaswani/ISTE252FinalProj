@@ -1,10 +1,8 @@
 {
   "name": "PottyPalProject",
-  "app_id": "",
-  "gulpStartupTasks": [
-    "sass",
-    "watch"
-  ],
+  "app_id": "830e7da1",
+  "v2": true,
+  "typescript": true,
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*",
