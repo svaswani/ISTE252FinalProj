@@ -21,17 +21,17 @@ angular.module('starter.controllers', [])
       console.log(long);
       var myLatlng = new google.maps.LatLng(lat,long);
       var mapOptions = {
-      center: myLatlng,
-      //center: myLatlng,
-      zoom: 19,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+        center: myLatlng,
+        //center: myLatlng,
+        zoom: 19,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
 
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    addMarker(myLatlng, map);
-      // google.maps.event.addListener(marker, 'click', function() {
-      //   infowindow.open(map,marker);
-      // });
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      addMarker(myLatlng, map);
+        // google.maps.event.addListener(marker, 'click', function() {
+        //   infowindow.open(map,marker);
+        // });
     }, function(err) {
       throw err;
     });
@@ -97,6 +97,7 @@ angular.module('starter.controllers', [])
     $cordovaSQLite.execute($scope.db,query,[bathroom.input, bathroom.name]).then(function(result) {
       console.log("user input: " + bathroom.input);
       $scope.reloadComments();
+      bathroom.input = '';
     }, function(error) {
       console.error(error);
     });

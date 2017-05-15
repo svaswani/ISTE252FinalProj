@@ -11,3 +11,11 @@
 .text {
     font-family: Dosis, sans-serif;
 }
+
+.mycolor {
+	background-color: #3C3E32;
+}
+
+.center-text {
+   text-align: center;
+}
