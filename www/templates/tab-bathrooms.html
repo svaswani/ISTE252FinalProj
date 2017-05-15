@@ -1,8 +1,10 @@
 <ion-view view-title="Bathrooms">
   <ion-content>
     <div ng-repeat="bathroom in bathrooms">
-      <h3 style="padding-left: 10px; text-align: center;">{{bathroom.name}}</h3>
-      <ion-list>
+      <div class="list card">
+      <div class="item center-text">
+        <h3 style="padding-left: 10px; text-align: center;" class="calm">{{bathroom.name}}</h3>
+       <ion-list>
        <div>
           <input type="text" placeholder="Comments or reviews" ng-model="bathroom.input">
         </div>
@@ -11,6 +13,8 @@
           <p>{{item.comment}}<br></p>
        </ion-item>
       </ion-list>
+      </div>
+    </div>
     </div>
   </ion-content>
 </ion-view>
